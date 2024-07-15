@@ -1,0 +1,39 @@
+.container {
+  background: linear-gradient(to bottom, #5d9fb8, #92bfd1);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Alinhar conteúdo no topo */
+  padding-top: 40px; /* Aumentar o espaçamento superior para o título */
+  position: relative; /* Adicionado para posicionar corretamente os elementos absolutos */
+}
+
+.title {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 2em; /* Tamanho da fonte */
+  font-weight: bold; /* Peso da fonte */
+  margin-bottom: 20px; /* Espaçamento inferior para separar dos botões */
+}
+
+.box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px; /* Espaçamento superior para separar do título */
+}
+
+.rodape {
+  position: absolute; /* Posiciona o rodapé de forma absoluta */
+  bottom: 10px; /* Distância do rodapé em relação ao fundo da .container */
+  font-size: 1em; /* Tamanho da fonte do rodapé */
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.contorno {
+  border: 2px solid black; /* Define o contorno com 2px de largura e cor preta */
+}
