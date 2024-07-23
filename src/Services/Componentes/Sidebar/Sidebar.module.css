@@ -1,0 +1,10 @@
+.sidebar_conteudo {
+    background-color: #5d9fb8;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+
+    width: 20%;
+    height: 100%;
+}
