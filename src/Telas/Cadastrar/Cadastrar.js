@@ -19,13 +19,35 @@ const Cadastrar = () => {
 
     const handleCadastrar = async (e) => {
         e.preventDefault();
-        // Adicione a lógica de cadastro aqui
+
+        // Verificar se as senhas coincidem
+        if (senha !== confirmarSenha) {
+            setError('As senhas não coincidem');
+            return;
+        }
+
+        // Limpar possíveis erros anteriores
+        setError(null);
+
+        try {
+            // Chamar a função de cadastro
+            await CadastrarUser();
+            // Redirecionar após o cadastro
+            navigate('/sucesso'); // ou para a página desejada após o sucesso
+        } catch (error) {
+            setError(error.message || 'Erro ao cadastrar usuário');
+        }
     };
 
     const CadastrarUser = async () => {
-        const resposta = await cadastrar(nome, cpf, senha, telefone, sobrenome)
-        console.log("ooooooooooooooooooooooooooooo")
-    }
+        try {
+            const resposta = await cadastrar(nome, cpf, senha, telefone, sobrenome);
+            console.log("Usuário cadastrado com sucesso:", resposta);
+            // Aqui você pode adicionar mais lógica se necessário
+        } catch (error) {
+            throw new Error(error.response?.data?.message || 'Erro ao cadastrar usuário');
+        }
+    };
 
     return (
         <div className={styles.container}>
@@ -66,7 +88,7 @@ const Cadastrar = () => {
                     </div>
                     <div className={styles.formGroup}>
                         <label className={styles.formLabel} htmlFor="telefone">
-                        Telefone <FaWhatsapp className={styles.icon} /> :
+                            Telefone <FaWhatsapp className={styles.icon} /> :
                         </label>
                         <InputMask
                             mask="(99) 99999-9999"
@@ -113,7 +135,7 @@ const Cadastrar = () => {
                         />
                     </div>
                     {error && <p className="text-danger">{error}</p>}
-                    <button onClick={CadastrarUser} type="submit" className="btn btn-primary w-100 mt-3">
+                    <button type="submit" className="btn btn-primary w-100 mt-3">
                         Cadastrar
                     </button>
                     <button type="button" className="btn btn-secondary w-100 mt-2" onClick={() => navigate('/')}>
