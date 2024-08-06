@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Telas/Home/Home';
 import Login from './Telas/Login/Login';
 import Cadastrar from './Telas/Cadastrar/Cadastrar';
@@ -8,15 +8,15 @@ import EditarUsuario from './Telas/EditarUsuario/EditarUsuario';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/usuario/menu" element={<Menu />} />
         <Route path="/usuario/cadastro" element={<Cadastrar />} />
         <Route path="/usuario/editar" element={<EditarUsuario />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 

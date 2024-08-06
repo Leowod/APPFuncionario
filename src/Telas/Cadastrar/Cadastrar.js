@@ -16,24 +16,26 @@ const Cadastrar = () => {
     const [senha, setSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
 
     const handleCadastrar = async (e) => {
         e.preventDefault();
-
-        // Verificar se as senhas coincidem
+        
         if (senha !== confirmarSenha) {
-            setError('As senhas não coincidem');
+            setError('Confirme a senha corretamente');
             return;
         }
-
-        // Limpar possíveis erros anteriores
+       
         setError(null);
 
         try {
             // Chamar a função de cadastro
             await CadastrarUser();
-            // Redirecionar após o cadastro
-            navigate('/sucesso'); // ou para a página desejada após o sucesso
+            // Definir sucesso e redirecionar após breve intervalo
+            setSuccess(true);
+            setTimeout(() => {
+                navigate('/login');
+            }, 3000); // 3 segundos para mostrar a mensagem de sucesso
         } catch (error) {
             setError(error.message || 'Erro ao cadastrar usuário');
         }
@@ -41,9 +43,8 @@ const Cadastrar = () => {
 
     const CadastrarUser = async () => {
         try {
-            const resposta = await cadastrar(nome, cpf, senha, telefone, sobrenome);
+            const resposta = await cadastrar(nome, sobrenome, cpf, telefone, endereco, senha);
             console.log("Usuário cadastrado com sucesso:", resposta);
-            // Aqui você pode adicionar mais lógica se necessário
         } catch (error) {
             throw new Error(error.response?.data?.message || 'Erro ao cadastrar usuário');
         }
@@ -135,6 +136,7 @@ const Cadastrar = () => {
                         />
                     </div>
                     {error && <p className="text-danger">{error}</p>}
+                    {success && <p className="text-success">Cadastro realizado com sucesso! Redirecionando para o login...</p>}
                     <button type="submit" className="btn btn-primary w-100 mt-3">
                         Cadastrar
                     </button>

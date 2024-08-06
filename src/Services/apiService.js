@@ -18,23 +18,19 @@ export const login = async (cpf, senha) => {
   }
 };
 
-export const cadastrar = async (nome, cpf, senha, telefone, sobrenome) => {
+export const cadastrar = async (nome, sobrenome, cpf, telefone, endereco, senha) => {
   try {
-    const usuario = {
-      nome: nome,
-      cpf: cpf,
-      senha: senha,
-      telefone: telefone,
-      sobrenome: sobrenome,
-    }
+    const response = await api.post('/Usuario/Cadastrar', {
+      nome,
+      sobrenome,
+      cpf,
+      telefone,
+      endereco,
+      senha,
+    });
 
-    console.log(usuario);
-
-    const response = await api.post('/Usuario/Cadastrar', usuario);
     return response.data;
   } catch (error) {
-    throw error;
+    throw new Error(error.response?.data?.message || 'Erro ao cadastrar usuário');
   }
 };
-
-// Adicione outras funções conforme as necessidades da sua aplicação

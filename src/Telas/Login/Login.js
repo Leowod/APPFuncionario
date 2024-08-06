@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import InputMask from 'react-input-mask';
 import { login } from '../../Services/apiService';
-import { useState } from 'react';
-
+import './Login.module.css';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,12 +14,24 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
+    if (!cpf || !senha) {
+      setError('Por favor, preencha todos os campos.');
+      return;
+    }
+
     try {
       const response = await login(cpf, senha);
-      // Lógica para armazenar o token JWT, redirecionar, etc.
-      navigate('/Menu'); // Exemplo de redirecionamento após login
+      
+      if (response && response.token) {
+        localStorage.setItem('token', response.token);
+        navigate('/usuario/menu');
+      } else {
+        setError('Erro ao obter token de autenticação.');
+      }
     } catch (error) {
-      setError('Usuário ou senha incorretos.'); // Trate erros específicos aqui
+      console.error('Erro ao fazer login:', error);
+      setError('CPF ou senha incorretos.');
     }
   };
 
