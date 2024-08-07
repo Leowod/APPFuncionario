@@ -13,10 +13,13 @@ const Home = () => {
         <h2 className={`${styles.slogan} text-center`}>A conexão rápida com sua empresa</h2>
 
         <div className="d-flex flex-column align-items-center gap-2 w-100">
-          <button className="btn btn-primary w-100 max-w-300" onClick={() => navigate('/Login')}>
+          <button className={`btn ${styles['btn-acessar']} w-100 max-w-300`} onClick={() => navigate('/Login')}>
             Acessar
           </button>
-          <button className="btn btn-secondary w-100 max-w-300" onClick={() => navigate('/usuario/cadastro')}>
+          <button className={`btn ${styles['btn-restaurar']} w-100 max-w-300`} onClick={() => navigate('/usuario/restaurar')}>
+            Restaurar Usuário
+          </button>
+          <button className={`btn ${styles['btn-cadastrar']} w-100 max-w-300`} onClick={() => navigate('/usuario/cadastro')}>
             Cadastrar
           </button>
           <p className={`${styles.rodape} text-center`}>Desenvolvido por Leonardo W O Dias</p>

@@ -29,9 +29,9 @@ const Cadastrar = () => {
         setError(null);
 
         try {
-            // Chamar a função de cadastro
+            
             await CadastrarUser();
-            // Definir sucesso e redirecionar após breve intervalo
+            
             setSuccess(true);
             setTimeout(() => {
                 navigate('/login');

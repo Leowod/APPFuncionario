@@ -38,7 +38,7 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <div className={styles.box}>
-        <h1 className={styles.title}>Preencha os campos abaixo para acessar seu perfil</h1>
+        <h1 className={styles.title}>Preencha os campos abaixo para acessar o Menu</h1>
         <form onSubmit={handleLogin}>
           <div className={styles.formGroup}>
             <label className={styles.formLabel} htmlFor="cpf">CPF</label>

@@ -20,7 +20,7 @@ export const login = async (cpf, senha) => {
 
 export const cadastrar = async (nome, sobrenome, cpf, telefone, endereco, senha) => {
   try {
-    const response = await api.post('/Usuario/Cadastrar', {
+    const response = await api.post('/usuario/Cadastrar', {
       nome,
       sobrenome,
       cpf,
@@ -32,5 +32,15 @@ export const cadastrar = async (nome, sobrenome, cpf, telefone, endereco, senha)
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Erro ao cadastrar usuário');
+  }
+};
+
+export const restaurarUsuario = async (cpf) => {
+  try {
+    const response = await axios.post(`${API_URL}/usuario/restaurar`, { cpf });
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao tentar restaurar usuário:', error);
+    throw error;
   }
 };

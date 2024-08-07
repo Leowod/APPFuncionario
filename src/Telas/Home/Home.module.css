@@ -1,5 +1,5 @@
 .container {
-  background: linear-gradient(to bottom, #5d9fb8, #92bfd1); /* Adicionando o mesmo fundo da tela de login */
+  background: linear-gradient(to bottom, #5d9fb8, #92bfd1);
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -21,7 +21,7 @@
 }
 
 .title {
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 2.2em;
   font-weight: bold;
   margin-bottom: 3%;
@@ -36,29 +36,38 @@
 .rodape {
   font-size: 1em;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  margin-top: 40%; /* Ajuste a margem superior conforme necessário */
-  text-align: center; /* Centralize o texto */
+  margin-top: 40%;
+  text-align: center;
 }
 
-.btn-primary {
-  background-color: #5d9fb8;
-  border-color: #5d9fb8;
+.btn-acessar {
+  background-color: #3558f5;
+  color: white;
 }
 
-.btn-primary:hover {
-  background-color: #92bfd1;
-  border-color: #92bfd1;
+.btn-restaurar {
+  background-color: #36799c;
+  color: white;
 }
 
-.btn-secondary {
-  background-color: #b8d8e0;
-  border-color: #b8d8e0;
-  color: black;
+.btn-cadastrar {
+  background-color: #818585;
+  color: white;
 }
 
-.btn-secondary:hover {
-  background-color: #d1e8ee;
-  border-color: #d1e8ee;
+.btn-acessar:hover {
+  background-color: #188edd;
+  border-color: #000000;
+}
+
+.btn-restaurar:hover {
+  background-color: #2ab8c2;
+  border-color: #000000;
+}
+
+.btn-cadastrar:hover {
+  background-color: #9a9fa0;
+  border-color: #000000;
 }
 
 @media (max-width: 768px) {
