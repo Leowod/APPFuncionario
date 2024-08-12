@@ -9,7 +9,6 @@
     position: relative;
 }
 
-
 .box {
     background-color: rgb(168, 207, 229);
     padding: 20px;
@@ -28,43 +27,37 @@
     margin-bottom: 25%;
 }
 
-
 .input {
     border-radius: 3px;
     border: 1px solid #ced4da;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 
-
-.formLabel {
-    color: #495057;
+.infoText {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 0.2rem;
+    text-align: left;
 }
 
 
 .rodape {
     font-size: 1em;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin-top: 50%;
+    margin-top: 84%;
     text-align: center;
 }
 
-/* Botão principal */
 .btn-restaurar {
-    background-color: #007bff;
-    /* Cor de fundo azul */
+    background-color: #36799c;
     border-radius: 4px;
-    /* Bordas arredondadas */
-    padding: 0.5rem 1rem;
-    /* Espaçamento interno do botão */
     color: #fff;
-    /* Cor do texto */
 }
 
 .btn-restaurar:hover {
-    background-color: #5e8ef5;
+    background-color: #2ab8c2;
     border-color: #000000;
-  }
-
+}
 
 .max-w-300 {
     max-width: 300px;

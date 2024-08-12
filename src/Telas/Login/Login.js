@@ -23,8 +23,8 @@ const Login = () => {
     try {
       const response = await login(cpf, senha);
       
-      if (response && response.token) {
-        localStorage.setItem('token', response.token);
+      if (response || response.user) {
+        localStorage.setItem('token', response.user);
         navigate('/usuario/menu');
       } else {
         setError('Erro ao obter token de autenticação.');

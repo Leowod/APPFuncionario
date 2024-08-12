@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './RestaurarUsuario.module.css'; // Certifique-se de que a importação está correta
+import styles from './RestaurarUsuario.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import InputMask from 'react-input-mask';
 import { restaurarUsuario } from '../../Services/apiService';
@@ -36,7 +36,7 @@ const RestaurarUsuario = () => {
     return (
         <div className={styles.container}>
             <div className={styles.box}>
-                <h1 className={styles.title}>Digite o CPF para restaurar o perfil do funcionário</h1>
+                <h1 className={styles.title}>Restaurar perfil de usuário inativo</h1>
                 <form onSubmit={handleSubmit} className="d-flex flex-column align-items-center gap-2 w-100">
                     <div className="form-group w-100">
                         <InputMask
@@ -47,6 +47,7 @@ const RestaurarUsuario = () => {
                             value={cpf}
                             onChange={handleCpfChange}
                         />
+                        <p className={styles.infoText}>Informe o CPF</p>
                     </div>
 
                     {mostrarSenha && (
