@@ -19,11 +19,15 @@ const RestaurarUsuario = () => {
 
         try {
             const resultado = await restaurarUsuario(cpf);
+            console.log(resultado);
 
-            if (resultado.existe) {
+            if (resultado.mensagem === "Usuário restaurado com sucesso.") {                
                 setMostrarSenha(true);
                 setMensagem('Digite a senha para confirmar');
-            } else {
+            } else if (resultado.mensagem === "Usuário já está ativo.") {                
+                setMostrarSenha(false);
+                setMensagem('Usuário já está ativo.');
+            } else if (resultado.mensagem === "Usuário não encontrado.") {                
                 setMostrarSenha(false);
                 setMensagem('CPF não encontrado. Por favor, tente novamente.');
             }

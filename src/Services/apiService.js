@@ -37,7 +37,19 @@ export const cadastrar = async (nome, sobrenome, cpf, telefone, endereco, senha)
 
 export const restaurarUsuario = async (cpf) => {
   try {
-    const response = await axios.get(`${API_URL}/api/usuarios/restaurar/${cpf}`);
+    const response = await axios.get(`${API_URL}/usuario/Restaurar/${cpf}`);
+    console.log("Resposta completa:", response);
+    return response.data;
+
+  } catch (error) {
+    console.error('Erro na chamada da API:', error);
+    throw error;
+  }
+};
+
+export const confirmarRestauracao = async (cpf, senha) => {
+  try {
+    const response = await axios.post(`${API_URL}/usuario/restaurar/confirmar`, { cpf, senha });
     return response.data;
   } catch (error) {
     console.error('Erro na chamada da API:', error);
