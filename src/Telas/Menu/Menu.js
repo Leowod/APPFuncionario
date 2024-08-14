@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaFileAlt, FaUser, FaCalendarAlt, FaClock, FaSignOutAlt, FaRegClock } from 'react-icons/fa';
+import { FaFileAlt, FaCalendarAlt, FaClock, FaSignOutAlt, FaRegClock } from 'react-icons/fa';
 import styles from './Menu.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,7 +8,6 @@ const Menu = () => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        // Recuperar informações do usuário do localStorage
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
             setUser(JSON.parse(storedUser));
@@ -19,26 +18,22 @@ const Menu = () => {
         <div className={styles.container}>
             <div className={styles.content}>
                 <h1 className={styles.title}>Bem-vindo ao Menu</h1>
-                
-                {/* Exibir informações do usuário */}
+
                 {user && (
-                    <div className={styles.userInfo}>
-                        <p><strong>Nome:</strong> {user.nome} {user.sobrenome}</p>
-                        <p><strong>Telefone:</strong> {user.telefone}</p>
-                        <p><strong>Endereço:</strong> {user.endereco}</p>
+                    <div className={styles.userInfoContainer}>
+                        <h2 className={styles.userInfoTitle}>Dados do Usuário</h2>
+                        <div className={styles.userInfo}>
+                            <p><strong>Nome:</strong> {user.nome} {user.sobrenome}</p>
+                            <p><strong>Telefone:</strong> {user.telefone}</p>
+                            <p><strong>Endereço:</strong> {user.endereco}</p>
+                        </div>
                     </div>
                 )}
 
                 <nav className={styles.nav}>
                     <ul className="list-unstyled">
                         <li className="mb-3">
-                            <Link to="/perfil" className={styles.link}>
-                                <FaUser className={styles.icon} /> Acessar perfil
-                            </Link>
-                        </li>
-
-                        <li className="mb-3">
-                            <Link to="usuario/holerites" className={styles.link}>
+                            <Link to="/usuario/holerites" className={styles.link}>
                                 <FaFileAlt className={styles.icon} /> Holerites
                             </Link>
                         </li>
@@ -71,7 +66,6 @@ const Menu = () => {
                 </nav>
                 <p className={styles.rodape}>Desenvolvido por Leonardo W O Dias</p>
             </div>
-
         </div>
     );
 };

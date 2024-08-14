@@ -45,4 +45,17 @@ export const restaurarUsuario = async (cpf) => {
     console.error('Erro na chamada da API:', error);
     throw error;
   }
+
+};
+
+export const obterUsuarioPorCpf = async (cpf) => {
+  try {
+    const response = await axios.get(`${API_URL}/usuario/obterPorCpf`, {
+      params: { cpf: cpf }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar dados do usuário:', error);
+    throw error;
+  }
 };

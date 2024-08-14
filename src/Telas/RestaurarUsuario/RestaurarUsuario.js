@@ -22,7 +22,7 @@ const RestaurarUsuario = () => {
 
             if (resultado.mensagem === "Usuário restaurado com sucesso.") {
                 setMostrarProsseguir(true);
-                setMensagem('Usuário restaurado com sucesso. Clique em "Prosseguir para Tela de Login".');
+                setMensagem('Usuário restaurado com sucesso.');
             } else if (resultado.mensagem === "Usuário já está ativo.") {
                 setMostrarProsseguir(false);
                 setMensagem('Usuário já está ativo.');

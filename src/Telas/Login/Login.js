@@ -4,7 +4,6 @@ import styles from './Login.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import InputMask from 'react-input-mask';
 import { login } from '../../Services/apiService';
-import './Login.module.css';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,12 +21,12 @@ const Login = () => {
 
     try {
       const response = await login(cpf, senha);
-      
-      if (response || response.user) {
-        localStorage.setItem('token', response.user);
+
+      if (response && response.user) {
+        localStorage.setItem('user', JSON.stringify(response.user));
         navigate('/usuario/menu');
       } else {
-        setError('Erro ao obter token de autenticação.');
+        setError('Erro ao obter dados do usuário.');
       }
     } catch (error) {
       console.error('Erro ao fazer login:', error);
