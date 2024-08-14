@@ -46,13 +46,3 @@ export const restaurarUsuario = async (cpf) => {
     throw error;
   }
 };
-
-export const confirmarRestauracao = async (cpf, senha) => {
-  try {
-    const response = await axios.post(`${API_URL}/usuario/restaurar/confirmar`, { cpf, senha });
-    return response.data;
-  } catch (error) {
-    console.error('Erro na chamada da API:', error);
-    throw error;
-  }
-};
