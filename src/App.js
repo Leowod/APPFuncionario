@@ -17,8 +17,8 @@ function App() {
         <Route path="/usuario/menu" element={<Menu />} />
         <Route path="/usuario/cadastro" element={<Cadastrar />} />
         <Route path="/usuario/restaurar" element={<RestaurarUsuario />} />
-        <Route path="/usuario/perfil" element={<PerfilUsuario />} />
         <Route path="/usuario/editar" element={<EditarUsuario />} />
+        <Route path="/usuario/perfil" element={<PerfilUsuario />} />
       </Routes>
     </Router>
   );

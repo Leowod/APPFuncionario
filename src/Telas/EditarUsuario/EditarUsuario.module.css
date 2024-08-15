@@ -1,0 +1,94 @@
+.container {
+    background: linear-gradient(to bottom, #5d9fb8, #92bfd1);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .content {
+    background-color: rgb(168, 207, 229);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px; /* Espaçamento entre o título e o formulário */
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .formGroup {
+    margin-bottom: 15px; /* Espaçamento entre os campos do formulário */
+    width: 100%;
+    text-align: left; /* Alinha o texto à esquerda */
+  }
+  
+  label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: calc(100% - 22px); /* Ajusta a largura dos campos para ser um pouco menor que o container */
+    padding: 8px; /* Reduz o padding dos campos */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem; /* Reduz o tamanho da fonte */
+  }
+  
+  .submitButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .submitButton:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .content {
+      padding: 15px;
+    }
+  
+    .title {
+      font-size: 1.2em;
+    }
+  
+    .formGroup input {
+      font-size: 0.8em; /* Ajusta o tamanho da fonte dos campos em telas menores */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .content {
+      padding: 10px;
+    }
+  
+    .title {
+      font-size: 1.1em;
+    }
+  
+    .formGroup input {
+      font-size: 0.8em;
+    }
+  }
+  

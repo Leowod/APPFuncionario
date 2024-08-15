@@ -59,3 +59,24 @@ export const obterUsuarioPorCpf = async (cpf) => {
     throw error;
   }
 };
+
+export const deletarUsuarioAsync = async (userId) => {
+  try {
+    const response = await axios.delete(`/api/usuarios/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Erro ao desativar o usuário');
+  }
+};
+
+export const atualizarAsync = async (id, updatedUserData) => {
+  try {
+      const response = await axios.put(`/api/usuarios/${id}`, updatedUserData);
+      return response.data;
+  } catch (error) {
+      console.error('Erro ao atualizar os dados do usuário:', error);
+      throw error;
+  }
+};
+
+export default api;

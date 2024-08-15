@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { FaFileAlt, FaCalendarAlt, FaClock, FaSignOutAlt, FaRegClock } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaFileAlt, FaCalendarAlt, FaClock, FaSignOutAlt, FaRegClock, FaUserEdit, FaUserTimes } from 'react-icons/fa';
 import styles from './Menu.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import apiService from '../../Services/apiService';
 
 const Menu = () => {
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -14,10 +16,29 @@ const Menu = () => {
         }
     }, []);
 
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        navigate('/');
+    };
+
+    const handleUpdateData = () => {
+        navigate('/usuario/editar');
+    };
+
+    const handleDesativarteUser = async () => {
+        try {
+            await apiService.DeletarAsync(user.id);
+            localStorage.removeItem('user');
+            navigate('/');
+        } catch (error) {
+            console.error('Erro ao desativar o usuário:', error);
+        }
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.content}>
-                <h1 className={styles.title}>Bem-vindo ao Menu</h1>
+                <h1 className={styles.title}>Menu portal do funcionário</h1>
 
                 {user && (
                     <div className={styles.userInfoContainer}>
@@ -30,40 +51,54 @@ const Menu = () => {
                     </div>
                 )}
 
-                <nav className={styles.nav}>
-                    <ul className="list-unstyled">
-                        <li className="mb-3">
-                            <Link to="/usuario/holerites" className={styles.link}>
-                                <FaFileAlt className={styles.icon} /> Holerites
-                            </Link>
-                        </li>
+                <div className={styles.mainContent}>
+                    <div className={styles.leftColumn}>
+                        <ul className="list-unstyled">
+                            <li className={`mb-3 ${styles.navItem}`}>
+                                <Link to="/usuario/holerites" className={styles.link}>
+                                    <FaFileAlt className={styles.icon} /> Holerites
+                                </Link>
+                            </li>
+                            <li className={`mb-3 ${styles.navItem}`}>
+                                <Link to="/usuario/agendarFerias" className={styles.link}>
+                                    <FaCalendarAlt className={styles.icon} /> Agendar férias
+                                </Link>
+                            </li>
+                            <li className="mb-3">
+                                <Link to="/usuario/horasExtras" className={styles.link}>
+                                    <FaClock className={styles.icon} /> Horas extras
+                                </Link>
+                            </li>
+                            <li className="mb-5">
+                                <Link to="/usuario/bancohoras" className={styles.link}>
+                                    <FaRegClock className={styles.icon} /> Banco de horas
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
 
-                        <li className="mb-3">
-                            <Link to="/usuario/agendarFerias" className={styles.link}>
-                                <FaCalendarAlt className={styles.icon} /> Agendar férias
-                            </Link>
-                        </li>
+                    <div className={styles.rightColumn}>
+                        <ul className="list-unstyled">
+                            <li className={`mb-3 ${styles.navItem}`}>
+                                <button onClick={handleUpdateData} className={styles.linkButton}>
+                                    <FaUserEdit className={styles.icon} /> Atualizar dados
+                                </button>
+                            </li>
+                            <li className={`mb-3 ${styles.navItem}`}>
+                                <button onClick={handleDesativarteUser} className={styles.linkButton}>
+                                    <FaUserTimes className={styles.icon} /> Desativar usuário
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-                        <li className="mb-3">
-                            <Link to="/usuario/horasExtras" className={styles.link}>
-                                <FaClock className={styles.icon} /> Horas extras
-                            </Link>
-                        </li>
+                <div className={styles.bottomSection}>
+                    <button onClick={handleLogout} className={styles.linkSairButton}>
+                        <FaSignOutAlt className={styles.icon} /> Sair
+                    </button>
+                </div>
 
-                        <li className="mb-5">
-                            <Link to="/usuario/bancohoras" className={styles.link}>
-                                <FaRegClock className={styles.icon} /> Banco de horas
-                            </Link>
-                        </li>
-
-                        <li className="mb-0">
-                            <Link to="/usuario/sair" className={styles.link}>
-                                <FaSignOutAlt className={styles.icon} /> Sair
-                            </Link>
-                        </li>
-
-                    </ul>
-                </nav>
                 <p className={styles.rodape}>Desenvolvido por Leonardo W O Dias</p>
             </div>
         </div>
