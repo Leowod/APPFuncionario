@@ -51,27 +51,6 @@
   margin-top: 3px;
 }
 
-.btn-primary {
-  background-color: #5d9fb8;
-  border-color: #5d9fb8;
-}
-
-.btn-primary:hover {
-  background-color: #92bfd1;
-  border-color: #92bfd1;
-}
-
-.btn-secondary {
-  background-color: #b8d8e0;
-  border-color: #b8d8e0;
-  color: black;
-}
-
-.btn-secondary:hover {
-  background-color: #d1e8ee;
-  border-color: #d1e8ee;
-}
-
 .rodape {
   font-size: 1em;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

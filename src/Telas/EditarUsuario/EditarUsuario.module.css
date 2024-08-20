@@ -21,7 +21,7 @@
   .title {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 20px; /* Espaçamento entre o título e o formulário */
+    margin-bottom: 20px;
   }
   
   .form {
@@ -31,9 +31,9 @@
   }
   
   .formGroup {
-    margin-bottom: 15px; /* Espaçamento entre os campos do formulário */
+    margin-bottom: 15px;
     width: 100%;
-    text-align: left; /* Alinha o texto à esquerda */
+    text-align: left;
   }
   
   label {
@@ -43,11 +43,11 @@
   }
   
   input {
-    width: calc(100% - 22px); /* Ajusta a largura dos campos para ser um pouco menor que o container */
-    padding: 8px; /* Reduz o padding dos campos */
+    width: 100%;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 0.9rem; /* Reduz o tamanho da fonte */
+    font-size: 0.9rem;
   }
   
   .submitButton {
@@ -74,7 +74,7 @@
     }
   
     .formGroup input {
-      font-size: 0.8em; /* Ajusta o tamanho da fonte dos campos em telas menores */
+      font-size: 0.8em;
     }
   }
   
