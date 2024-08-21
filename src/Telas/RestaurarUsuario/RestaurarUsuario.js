@@ -3,8 +3,11 @@ import styles from './RestaurarUsuario.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import InputMask from 'react-input-mask';
 import { restaurarUsuario } from '../../Services/apiService';
+import { useNavigate } from 'react-router-dom';
+
 
 const RestaurarUsuario = () => {
+    const navigate = useNavigate();
     const [cpf, setCpf] = useState('');
     const [mostrarProsseguir, setMostrarProsseguir] = useState(false);
     const [mensagem, setMensagem] = useState('');
@@ -57,18 +60,21 @@ const RestaurarUsuario = () => {
                         <p className={styles.infoText}>Informe o CPF</p>
                     </div>
 
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         className={`btn ${styles['btn-restaurar']} w-100 max-w-300`}
                         disabled={mostrarProsseguir}
                     >
                         Restaurar
                     </button>
+                    <button type="button" className="btn btn-secondary w-100 mt-3" onClick={() => navigate('/')}>
+                        Voltar
+                    </button>
                 </form>
 
                 {mostrarProsseguir && (
-                    <button 
-                        onClick={handleProsseguir} 
+                    <button
+                        onClick={handleProsseguir}
                         className={`btn ${styles['btn-restaurar']} w-100 max-w-300 mt-3`}
                     >
                         Prosseguir para Tela de Login

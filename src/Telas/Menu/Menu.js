@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaFileAlt, FaCalendarAlt, FaClock, FaSignOutAlt, FaRegClock, FaUserEdit, FaUserTimes, FaKey } from 'react-icons/fa';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Alert } from 'react-bootstrap';
 import styles from './Menu.module.css';
 import apiService from '../../Services/apiService';
 
@@ -10,12 +10,8 @@ const Menu = () => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
-    const [updatedUserData, setUpdatedUserData] = useState({
-        nome: '',
-        sobrenome: '',
-        telefone: '',
-        endereco: ''
-    });
+    const [successMessage, setSuccessMessage] = useState('');
+    const [updatedUserData, setUpdatedUserData] = useState({});
     const [passwordData, setPasswordData] = useState({
         senhaAtual: '',
         novaSenha: '',
@@ -37,6 +33,7 @@ const Menu = () => {
 
     const handleUpdateData = () => {
         setUpdatedUserData({
+            usuarioId: user.usuarioId || '',
             nome: user.nome || '',
             sobrenome: user.sobrenome || '',
             telefone: user.telefone || '',
@@ -47,11 +44,19 @@ const Menu = () => {
 
     const handleSaveUpdatedData = async () => {
         try {
-            const updatedUser = await apiService.atualizarUsuarioLogado(updatedUserData);
+            console.log("aaaaaaaaaaaaaaaaaa")
+            console.log("asadasdasdas", updatedUserData)
+            const updatedUser = await apiService.atualizarUsuario(updatedUserData);
+            console.log("wwwwwwwwwwwwwww")
             setUser(updatedUser);
+            console.log("vvvvvvvvvvvvvvvv")
             localStorage.setItem('user', JSON.stringify(updatedUser));
+            console.log("eeeeeeeeeeeeeeeeee")
             setShowUpdateModal(false);
-            navigate('/usuario/menu');
+            console.log("fffffffffffffffffffff")
+            setSuccessMessage('Dados atualizados com sucesso!');
+            console.log("ggggggggggggggg")
+            setTimeout(() => setSuccessMessage(''), 3000);
         } catch (error) {
             console.error('Erro ao atualizar os dados do usuário:', error);
         }
@@ -75,7 +80,8 @@ const Menu = () => {
 
             setPasswordData({ senhaAtual: '', novaSenha: '', confirmarNovaSenha: '' });
             setShowChangePasswordModal(false);
-            navigate('/usuario/menu');
+            setSuccessMessage('Senha alterada com sucesso!');
+            setTimeout(() => setSuccessMessage(''), 3000);
         } catch (error) {
             console.error('Erro ao alterar a senha:', error);
         }
@@ -83,9 +89,13 @@ const Menu = () => {
 
     const handleDesativarteUser = async () => {
         try {
-            await apiService.deletarUsuarioLogado();
-            localStorage.removeItem('user');
-            navigate('/');
+            await apiService.deletarUsuarioLogadoAsync();
+            
+            setSuccessMessage('Usuário desativado com sucesso!');
+            setTimeout(() => {
+                setSuccessMessage('');
+                navigate('/');
+            }, 3000);
         } catch (error) {
             console.error('Erro ao desativar o usuário:', error);
         }
@@ -97,6 +107,8 @@ const Menu = () => {
 
     const handleCloseModal = () => {
         setShowConfirmModal(false);
+        setShowUpdateModal(false);
+        setShowChangePasswordModal(false);
     };
 
     const handleConfirmDesativarUser = async () => {
@@ -108,6 +120,12 @@ const Menu = () => {
         <div className={styles.container}>
             <div className={styles.content}>
                 <h1 className={styles.title}>Menu portal do funcionário</h1>
+
+                {successMessage && (
+                    <Alert variant="success" className={styles.alert}>
+                        {successMessage}
+                    </Alert>
+                )}
 
                 {user && (
                     <div className={styles.userInfoContainer}>
@@ -138,7 +156,7 @@ const Menu = () => {
                                     <FaFileAlt className={styles.icon} /> Holerites
                                 </Link>
                             </li>
-                            <li className="mb-5">
+                            <li className="mb-3">
                                 <Link to="/usuario/horasExtras" className={styles.link}>
                                     <FaClock className={styles.icon} /> Horas extras
                                 </Link>
@@ -167,7 +185,7 @@ const Menu = () => {
                     </div>
                 </div>
 
-                <div className={styles.bottomSection}>
+                <div className={`mt-5 ${styles.bottomSection}`}>
                     <button onClick={handleLogout} className={styles.linkSairButton}>
                         <FaSignOutAlt className={styles.icon} /> Sair
                     </button>
@@ -240,7 +258,7 @@ const Menu = () => {
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowUpdateModal(false)}>
+                    <Button variant="secondary" onClick={handleCloseModal}>
                         Cancelar
                     </Button>
                     <Button variant="primary" onClick={handleSaveUpdatedData}>

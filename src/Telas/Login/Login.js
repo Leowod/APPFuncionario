@@ -24,6 +24,7 @@ const Login = () => {
 
       if (response && response.user) {
         localStorage.setItem('user', JSON.stringify(response.user));
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa", response)
         navigate('/usuario/menu');
       } else {
         setError('Erro ao obter dados do usuário.');
@@ -65,7 +66,7 @@ const Login = () => {
           <button type="submit" className="btn btn-primary w-100 mt-3">
             Entrar
           </button>
-          <button type="button" className="btn btn-secondary w-100 mt-2" onClick={() => navigate('/')}>
+          <button type="button" className="btn btn-secondary w-100 mt-3" onClick={() => navigate('/')}>
             Voltar
           </button>
         </form>

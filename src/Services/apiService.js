@@ -66,36 +66,42 @@ export const deletarUsuarioAsync = async (userId) => {
   }
 };
 
-export const deletarUsuarioLogado = async () => {
+export const atualizarUsuario = async (dadosAtualizados) => {
+  console.log("ADFDSDFSDFGDFDG" , dadosAtualizados || "SDASADSADSDFSD");
   try {
-    const token = localStorage.getItem('token'); // Corrigido para buscar o token JWT
+    console.log("sfdfgdghfghghjgh");
+    const response = await api.put(`/usuario/Atualizar/${dadosAtualizados.usuarioId}`, dadosAtualizados);
+
+    console.log("Resposta da API:", response.data);
+
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao atualizar os dados do usuário:DE', error);
+    throw error;
+  }
+};
+
+export const deletarUsuarioLogadoAsync = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token de autenticação não encontrado');
+    }
+
     const response = await api.delete('/usuario/Delete', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+
+    console.log("Resposta da API ao deletar usuário:", response.data);
+
     return response.data;
   } catch (error) {
+    console.error('Erro ao desativar o usuário:', error);
     throw new Error('Erro ao desativar o usuário');
   }
 };
 
-export const atualizarUsuarioLogado = async (dadosAtualizados) => {
-  try {
-      const token = localStorage.getItem('token');
-      const response = await api.put('/usuario/Atualizar', dadosAtualizados, {
-          headers: {
-              Authorization: `Bearer ${token}`,
-          },
-      });
-
-      console.log("Resposta da API:", response);
-
-      return response.data;
-  } catch (error) {
-      console.error('Erro ao atualizar os dados do usuário:', error);
-      throw error;
-  }
-};
 
 export default api;
