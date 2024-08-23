@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaFileAlt, FaCalendarAlt, FaClock, FaSignOutAlt, FaRegClock, FaUserEdit, FaUserTimes, FaKey } from 'react-icons/fa';
 import { Modal, Button, Alert } from 'react-bootstrap';
 import styles from './Menu.module.css';
-import apiService from '../../Services/apiService';
+import { alterarSenha, atualizar, deletarUsuarioAsync } from '../../Services/apiService';
+
 
 const Menu = () => {
     const [user, setUser] = useState(null);
@@ -11,7 +12,9 @@ const Menu = () => {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
+    const [dangerMessage, setDangerMessage] = useState('');
     const [updatedUserData, setUpdatedUserData] = useState({});
+    const [idFixo, setIdFixo] = useState('');
     const [passwordData, setPasswordData] = useState({
         senhaAtual: '',
         novaSenha: '',
@@ -26,6 +29,12 @@ const Menu = () => {
         }
     }, []);
 
+    useEffect(() => {
+        if (user?.usuarioId) {
+            setIdFixo(user?.usuarioId);
+        }
+    }, [user?.usuarioId]);
+
     const handleLogout = () => {
         localStorage.removeItem('user');
         navigate('/');
@@ -33,7 +42,7 @@ const Menu = () => {
 
     const handleUpdateData = () => {
         setUpdatedUserData({
-            usuarioId: user.usuarioId || '',
+            usuarioId: idFixo,
             nome: user.nome || '',
             sobrenome: user.sobrenome || '',
             telefone: user.telefone || '',
@@ -44,21 +53,24 @@ const Menu = () => {
 
     const handleSaveUpdatedData = async () => {
         try {
-            console.log("aaaaaaaaaaaaaaaaaa")
-            console.log("asadasdasdas", updatedUserData)
-            const updatedUser = await apiService.atualizarUsuario(updatedUserData);
-            console.log("wwwwwwwwwwwwwww")
-            setUser(updatedUser);
-            console.log("vvvvvvvvvvvvvvvv")
+            const updatedUser = await atualizar(idFixo, updatedUserData);
+            setUser(
+                {
+                    usuarioId: idFixo,
+                    nome: updatedUser.nome,
+                    sobrenome: updatedUser.sobrenome,
+                    telefone: updatedUser.telefone,
+                    endereco: updatedUser.endereco
+                }
+            );
             localStorage.setItem('user', JSON.stringify(updatedUser));
-            console.log("eeeeeeeeeeeeeeeeee")
             setShowUpdateModal(false);
-            console.log("fffffffffffffffffffff")
             setSuccessMessage('Dados atualizados com sucesso!');
-            console.log("ggggggggggggggg")
             setTimeout(() => setSuccessMessage(''), 3000);
         } catch (error) {
-            console.error('Erro ao atualizar os dados do usuário:', error);
+            setShowUpdateModal(false);
+            setDangerMessage('Erro ao atualizar os dados do usuário!');
+            setTimeout(() => setDangerMessage(''), 3000);
         }
     };
 
@@ -73,8 +85,9 @@ const Menu = () => {
         }
 
         try {
-            await apiService.alterarSenha({
-                senhaAtual: passwordData.senhaAtual,
+            await alterarSenha({
+                id: idFixo,
+                senha: passwordData.senhaAtual,
                 novaSenha: passwordData.novaSenha
             });
 
@@ -83,14 +96,16 @@ const Menu = () => {
             setSuccessMessage('Senha alterada com sucesso!');
             setTimeout(() => setSuccessMessage(''), 3000);
         } catch (error) {
-            console.error('Erro ao alterar a senha:', error);
+            setShowChangePasswordModal(false);
+            setDangerMessage('Erro ao alterar a senha!');
+            setTimeout(() => setDangerMessage(''), 3000);
         }
     };
 
     const handleDesativarteUser = async () => {
         try {
-            await apiService.deletarUsuarioLogadoAsync();
-            
+            await deletarUsuarioAsync();
+
             setSuccessMessage('Usuário desativado com sucesso!');
             setTimeout(() => {
                 setSuccessMessage('');
@@ -124,6 +139,12 @@ const Menu = () => {
                 {successMessage && (
                     <Alert variant="success" className={styles.alert}>
                         {successMessage}
+                    </Alert>
+                )}
+
+                {dangerMessage && (
+                    <Alert variant="danger" className={styles.alert}>
+                        {dangerMessage}
                     </Alert>
                 )}
 

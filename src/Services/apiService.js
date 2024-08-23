@@ -9,12 +9,41 @@ const api = axios.create({
   },
 });
 
+export const atualizar = async (id,dados) =>
+{
+
+    const info = {
+      nome: dados.nome,
+      sobrenome: dados.sobrenome,
+      telefone: dados.telefone,
+      endereco: dados.endereco
+    }
+
+    const response = await api.put(`/usuario/atualizar/${id}`, info )
+
+    return response.data;
+} 
+
+
+export const alterarSenha = async (dados) => { 
+  
+
+    const info = {
+      id: dados.id,
+      senha: dados.senha,
+      novaSenha: dados.novaSenha
+    }
+
+    return await api.put(`/usuario/alterarSenha`, info)
+
+}
+
 export const login = async (cpf, senha) => {
   try {
     const response = await api.post('/usuario/Logar', { cpf, senha });
     return response.data;
   } catch (error) {
-    throw error;
+    return error;
   }
 };
 
