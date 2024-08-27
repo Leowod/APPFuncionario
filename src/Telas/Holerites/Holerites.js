@@ -26,7 +26,7 @@ const Holerites = () => {
         <div className={styles.container}>
             <div className={styles.box}>
                 <h1 className={`${styles.title} text-center`}>Seus holerites</h1>
-                <Table bordered hover>
+                <Table bordered hover >
                     <thead>
                         <tr>
                             <th>Mês</th>

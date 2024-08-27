@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaFileAlt, FaCalendarAlt, FaClock, FaSignOutAlt, FaRegClock, FaUserEdit, FaUserTimes, FaKey } from 'react-icons/fa';
 import { Modal, Button, Alert } from 'react-bootstrap';
 import styles from './Menu.module.css';
-import { alterarSenha, atualizar, deletarUsuarioAsync } from '../../Services/apiService';
+import { alterarSenha, atualizar, deletarUsuario } from '../../Services/apiService';
 
 
 const Menu = () => {
@@ -102,9 +102,9 @@ const Menu = () => {
         }
     };
 
-    const handleDesativarteUser = async () => {
+    const handleDesativarUser = async () => {
         try {
-            await deletarUsuarioAsync();
+            await deletarUsuario(idFixo);
 
             setSuccessMessage('Usuário desativado com sucesso!');
             setTimeout(() => {
@@ -113,6 +113,8 @@ const Menu = () => {
             }, 3000);
         } catch (error) {
             console.error('Erro ao desativar o usuário:', error);
+            setDangerMessage('Erro ao desativar o usuário!');
+            setTimeout(() => setDangerMessage(''), 3000);
         }
     };
 
@@ -127,7 +129,7 @@ const Menu = () => {
     };
 
     const handleConfirmDesativarUser = async () => {
-        await handleDesativarteUser();
+        await handleDesativarUser();
         setShowConfirmModal(false);
     };
 

@@ -21,6 +21,7 @@ function App() {
         <Route path="/usuario/restaurar" element={<RestaurarUsuario />} />
         <Route path="/usuario/editar" element={<EditarUsuario />} />
         <Route path="/usuario/perfil" element={<PerfilUsuario />} />
+        <Route path="/usuario/deletar" element={<usuarioDeletar />} />
       </Routes>
     </Router>
   );

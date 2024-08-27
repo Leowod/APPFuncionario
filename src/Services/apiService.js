@@ -9,32 +9,31 @@ const api = axios.create({
   },
 });
 
-export const atualizar = async (id,dados) =>
-{
+export const atualizar = async (id, dados) => {
 
-    const info = {
-      nome: dados.nome,
-      sobrenome: dados.sobrenome,
-      telefone: dados.telefone,
-      endereco: dados.endereco
-    }
+  const info = {
+    nome: dados.nome,
+    sobrenome: dados.sobrenome,
+    telefone: dados.telefone,
+    endereco: dados.endereco
+  }
 
-    const response = await api.put(`/usuario/atualizar/${id}`, info )
+  const response = await api.put(`/usuario/atualizar/${id}`, info)
 
-    return response.data;
-} 
+  return response.data;
+}
 
 
-export const alterarSenha = async (dados) => { 
-  
+export const alterarSenha = async (dados) => {
 
-    const info = {
-      id: dados.id,
-      senha: dados.senha,
-      novaSenha: dados.novaSenha
-    }
 
-    return await api.put(`/usuario/alterarSenha`, info)
+  const info = {
+    id: dados.id,
+    senha: dados.senha,
+    novaSenha: dados.novaSenha
+  }
+
+  return await api.put(`/usuario/alterarSenha`, info)
 
 }
 
@@ -66,11 +65,22 @@ export const cadastrar = async (nome, sobrenome, cpf, telefone, endereco, senha)
 
 export const restaurarUsuario = async (cpf) => {
   try {
-    const response = await api.get(`/usuario/Restaurar/${cpf}`);
+    const response = await api.get(`/usuario/restaurar/${cpf}`);
     return response.data;
   } catch (error) {
     console.error('Erro na chamada da API:', error);
     throw error;
+  }
+};
+
+export const deletarUsuario = async (usuarioId) => {
+  console.log('Tentando deletar o usuário com ID:', usuarioId);
+  try {
+    const response = await api.delete(`usuario/Delete/${usuarioId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erro na chamada de API ao desativar usuário:', error);
+    throw Error('Erro ao desativar o usuário.');
   }
 };
 
@@ -86,19 +96,8 @@ export const obterUsuarioPorCpf = async (cpf) => {
   }
 };
 
-export const deletarUsuarioAsync = async (userId) => {
-  try {
-    const response = await api.delete(`/usuario/Delete/${userId}`);
-    return response.data;
-  } catch (error) {
-    throw new Error('Erro ao desativar o usuário');
-  }
-};
-
 export const atualizarUsuario = async (dadosAtualizados) => {
-  console.log("ADFDSDFSDFGDFDG" , dadosAtualizados || "SDASADSADSDFSD");
   try {
-    console.log("sfdfgdghfghghjgh");
     const response = await api.put(`/usuario/Atualizar/${dadosAtualizados.usuarioId}`, dadosAtualizados);
 
     console.log("Resposta da API:", response.data);
@@ -110,27 +109,27 @@ export const atualizarUsuario = async (dadosAtualizados) => {
   }
 };
 
-export const deletarUsuarioLogadoAsync = async () => {
-  try {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('Token de autenticação não encontrado');
-    }
+// export const deletarUsuarioLogadoAsync = async () => {
+//   try {
+//     const token = localStorage.getItem('token');
+//     if (!token) {
+//       throw new Error('Token de autenticação não encontrado');
+//     }
 
-    const response = await api.delete('/usuario/Delete', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+//     const response = await api.delete('/usuario/Delete', {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
 
-    console.log("Resposta da API ao deletar usuário:", response.data);
+//     console.log("Resposta da API ao deletar usuário:", response.data);
 
-    return response.data;
-  } catch (error) {
-    console.error('Erro ao desativar o usuário:', error);
-    throw new Error('Erro ao desativar o usuário');
-  }
-};
+//     return response.data;
+//   } catch (error) {
+//     console.error('Erro ao desativar o usuário:', error);
+//     throw new Error('Erro ao desativar o usuário');
+//   }
+// };
 
 
 export default api;
