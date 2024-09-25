@@ -23,31 +23,31 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 1.1em;
     font-weight: bold;
-    margin-bottom: 15px; /* Reduzido o espaçamento inferior */
+    margin-bottom: 15px;
 }
 
 .formGroup {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 0.5rem; /* Reduzido o espaçamento inferior */
+    margin-bottom: 0.5rem;
 }
 
 .formLabel {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: left;
-    margin-bottom: 3px; /* Reduzido o espaçamento inferior */
+    margin-bottom: 3px;
     display: block;
 }
 
 .input {
-    width: calc(100%); /* Reduzida a largura do campo */
+    width: calc(100%);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding: 2px;
     border: 2px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    margin-top: 1px; /* Reduzido o espaçamento superior */
+    margin-top: 1px;
 }
 
 .icon {
@@ -79,7 +79,7 @@
 .rodape {
     font-size: 1em;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin-top: 5%; /* Ajuste a margem superior conforme necessário */
+    margin-top: 5%;
     text-align: center;
 }
 
@@ -103,6 +103,6 @@
     }
 
     .input {
-        width: calc(100% - 12px); /* Ajuste menor de largura para telas menores */
+        width: calc(100% - 12px);
     }
 }
